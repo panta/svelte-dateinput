@@ -16,7 +16,7 @@
 		"DD/MM/YYYY", "DD-MM-YYYY"
 	];
     export let outputFormat = isArray(format) ? format[0] : format;
-    export let value = new Date();
+    export let value;
 	export let inputText = formatDate(value);
     export let formatted = formatDate(value);
     export let valid = false;
@@ -66,10 +66,11 @@
         if (isString(dt)) {
             return dt;
         }
+        dt = dayjs(dt);
         if (!dt.isValid()) {
             return "";
 		}
-		return dayjs(dt).format(formats[0]);
+		return dt.format(formats[0]);
 	}
 
 	function isValidDate(dt) {
